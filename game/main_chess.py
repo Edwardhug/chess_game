@@ -52,20 +52,32 @@ starting_order = {(0, 0): pygame.image.load(br.image), (1, 0): pygame.image.load
                   (6, 7): pygame.image.load(wc.image), (7, 7): pygame.image.load(wr.image),}
 
 
+# -----------------------Init window and looping it------------------------------------------
+
+
 WIDTH = 800
 
 pygame.init()
 
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
 
-continuer = True
+done = False
 
-while continuer:
+keys=pygame.key.get_pressed()
+
+while not done:
+    # --- Main event loop
     for event in pygame.event.get():
-        if event.type == pygame.K_ESCAPE:
-            continuer = False
+        if event.type == pygame.KEYDOWN:
+            keys = pygame.key.get_pressed()
+    
+    if event.type == pygame.QUIT or keys[pygame.K_ESCAPE]:
+        done = True
 
 pygame.quit()
+
+#--------------------------------checking mat and pat---------------------------------------
+
 
 # board = chess.Board()
 # board = chess.Board("k7/8/8/8/8/8/5q2/7K")													 #stalemate situation
