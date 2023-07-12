@@ -8,8 +8,8 @@ import sys
 
 # -----------------------------------Board init--------------------------------------
 
-# board = chess.Board()
-board = chess.Board("k7/8/8/8/8/8/5q2/7K")													 #stalemate situation
+board = chess.Board()
+# board = chess.Board("k7/8/8/8/8/8/5q2/7K")													 #stalemate situation
 # board = chess.Board("k7/8/8/8/8/8/8/7K")														 #pat no check mate possible
 # board = chess.Board("r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4")      #check mate
 
@@ -64,7 +64,7 @@ wc = Piece('c', 'Pieces_png/cw.png')
 
 # ------------------------Fonction to print grid---------------------------------------------
 
-def print_grid(WIDTH, WHITE, WIN):
+def print_grid(WIDTH, WHITE, WIN, BLACK):
 	i = 0
 	while i < 8:
 		j = 0
@@ -75,6 +75,18 @@ def print_grid(WIDTH, WHITE, WIN):
 		j = 1
 		while j < 8:
 			pygame.draw.rect(WIN, WHITE, pygame.Rect(j * (WIDTH / 8), i * (WIDTH / 8), WIDTH / 8, WIDTH / 8))
+			j += 2
+		i += 1
+	i = 0
+	while i < 8:
+		j = 1
+		while j < 8:
+			pygame.draw.rect(WIN, BLACK, pygame.Rect(j * (WIDTH / 8), i * (WIDTH / 8), WIDTH / 8, WIDTH / 8))
+			j += 2
+		i += 1
+		j = 0
+		while j < 8:
+			pygame.draw.rect(WIN, BLACK, pygame.Rect(j * (WIDTH / 8), i * (WIDTH / 8), WIDTH / 8, WIDTH / 8))
 			j += 2
 		i += 1
 	pygame.display.flip()
@@ -157,12 +169,13 @@ def print_pieces(WIN, WIDTH):
 WIDTH = 800
 done = False
 WHITE = (250,235,215)
+BLACK = (136, 66, 29)
 
 pygame.init()
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
 keys=pygame.key.get_pressed()
 pygame.display.set_caption("Chess")
-print_grid(WIDTH, WHITE, WIN)
+print_grid(WIDTH, WHITE, WIN, BLACK)
 print_pieces(WIN, WIDTH)
 
 while not done:
