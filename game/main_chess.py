@@ -8,8 +8,8 @@ import sys
 
 # -----------------------------------Board init--------------------------------------
 
-board = chess.Board()
-# board = chess.Board("k7/8/8/8/8/8/5q2/7K")													 #stalemate situation
+# board = chess.Board()
+board = chess.Board("k7/8/8/8/8/8/5q2/7K")													 #stalemate situation
 # board = chess.Board("k7/8/8/8/8/8/8/7K")														 #pat no check mate possible
 # board = chess.Board("r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4")      #check mate
 
@@ -96,49 +96,51 @@ wc_image = pygame.image.load(wc.image)
 
 def print_pieces(WIN, WIDTH):
 	i = 0
-	x = WIDTH / 8
-	y = WIDTH / 8
-	while (board[i] and board[i] != " "):
-		if (board[i] == "/"):
+	board_str = str(board)
+	print(board_str)
+	x = WIDTH / 48
+	y = WIDTH / 48
+	while (i < len(board_str)):
+		if (board_str[i] == '\n'):
 			y += WIDTH / 8
-			x = WIDTH / 8
-		if (board[i].isnumeric() == True):
-			x += (WIDTH / 8) * board[i]
-		elif (board[i] == 'P'):
+			x = WIDTH / 48
+		elif (board_str[i] == 'P'):
 			WIN.blit(bp_image, (x,y))
 			x += WIDTH / 8
-		elif (board[i] == 'p'):
+		elif (board_str[i] == 'p'):
 			WIN.blit(wp_image, (x,y))
 			x += WIDTH / 8
-		elif (board[i] == 'K'):
+		elif (board_str[i] == 'K'):
 			WIN.blit(bk_image, (x,y))
 			x += WIDTH / 8
-		elif (board[i] == 'k'):
+		elif (board_str[i] == 'k'):
 			WIN.blit(wk_image, (x,y))
 			x += WIDTH / 8
-		elif (board[i] == 'R'):
+		elif (board_str[i] == 'R'):
 			WIN.blit(br_image, (x,y))
 			x += WIDTH / 8
-		elif (board[i] == 'r'):
+		elif (board_str[i] == 'r'):
 			WIN.blit(wr_image, (x,y))
 			x += WIDTH / 8
-		elif (board[i] == 'B'):
+		elif (board_str[i] == 'B'):
 			WIN.blit(bb_image, (x,y))
 			x += WIDTH / 8
-		elif (board[i] == 'b'):
+		elif (board_str[i] == 'b'):
 			WIN.blit(wb_image, (x,y))
 			x += WIDTH / 8
-		elif (board[i] == 'Q'):
+		elif (board_str[i] == 'Q'):
 			WIN.blit(bq_image, (x,y))
 			x += WIDTH / 8
-		elif (board[i] == 'q'):
+		elif (board_str[i] == 'q'):
 			WIN.blit(wq_image, (x,y))
 			x += WIDTH / 8
-		elif (board[i] == 'C'):
+		elif (board_str[i] == 'N'):
 			WIN.blit(bc_image, (x,y))
 			x += WIDTH / 8
-		elif (board[i] == 'c'):
+		elif (board_str[i] == 'n'):
 			WIN.blit(wc_image, (x,y))
+			x += WIDTH / 8
+		elif (board_str[i] == '.'):
 			x += WIDTH / 8
 		i += 1
 	pygame.display.flip()
